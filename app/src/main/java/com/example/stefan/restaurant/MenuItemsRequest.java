@@ -1,6 +1,5 @@
 package com.example.stefan.restaurant;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
@@ -15,55 +14,62 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CategoriesRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class MenuItemsRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
     Context context;
     Callback activity;
 
     public interface Callback {
-        void gotCategories(ArrayList<String> categories);
-        void gotCategoriesError(String message);
+        void gotMenuItems(ArrayList<MenuItem> menuItems);
+        void gotMenuItemsError(String message);
     }
 
-    public CategoriesRequest(Context context) {
+    public MenuItemsRequest (Context context) {
         this.context = context;
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        activity.gotCategoriesError(error.getMessage());
+        activity.gotMenuItemsError(error.getMessage());
     }
 
     @Override
     public void onResponse(JSONObject response) {
         JSONArray jsonArray = null;
         try {
-            jsonArray = response.getJSONArray("categories");
+            jsonArray = response.getJSONArray("items");
         } catch (JSONException e) {
             e.printStackTrace();
-            activity.gotCategoriesError(e.getMessage());
+            activity.gotMenuItemsError(e.getMessage());
         }
 
         if (jsonArray != null) {
-            ArrayList<String> categories = new ArrayList<String>();
+            ArrayList<MenuItem> items = new ArrayList<MenuItem>();
             for (int i = 0; i<jsonArray.length(); i++) {
                 try {
-                    categories.add(jsonArray.get(i).toString());
+                    MenuItem menuItem = new MenuItem();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    menuItem.setCategory(jsonObject.getString("category"));
+                    menuItem.setName(jsonObject.getString("name"));
+                    menuItem.setDescription(jsonObject.getString("description"));
+                    menuItem.setPrice(jsonObject.getString("price"));
+                    menuItem.setImageUrl(jsonObject.getString("image_url"));
+                    items.add(menuItem);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    activity.gotCategoriesError(e.getMessage());
+                    activity.gotMenuItemsError(e.getMessage());
                 }
             }
-            activity.gotCategories(categories);
+            activity.gotMenuItems(items);
         }
     }
 
-    void getCategories(Callback activity) {
+    void getMenuItems(Callback activity, String category) {
         this.activity = activity;
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                "https://resto.mprog.nl/categories",
+                "https://resto.mprog.nl/menu?category=" + category,
                 null, this, this);
         queue.add(jsonObjectRequest);
     }

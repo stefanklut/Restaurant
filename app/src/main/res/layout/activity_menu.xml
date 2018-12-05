@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    tools:context=".CategoriesActivity">
+    tools:context=".MenuActivity">
 
     <ListView
-        android:id="@+id/listViewCategories"
+        android:id="@+id/listViewMenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
+        android:layout_height="match_parent"
+        android:layout_margin="12dp" />
 </LinearLayout>
