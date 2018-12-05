@@ -32,14 +32,17 @@ public class MenuAdapter extends ArrayAdapter {
         TextView price = convertView.findViewById(R.id.textViewPrice);
         ImageView image = convertView.findViewById(R.id.imageViewMenu);
 
-        // Depending on the position set the menu item
+        // Depending on the position set name, price and description of the menu item
         MenuItem menuItem = menuItems.get(position);
         name.setText(menuItem.getName());
         price.setText("$ " + menuItem.getPrice());
+
+        // Set image in image view based on the url that was in the MenuItem Object
         Picasso.get()
                 .load(menuItem.getImageUrl())
-                .resize(250, 250)
+                .resize(256, 256)
                 .centerCrop()
+                .error(R.drawable.error)
                 .into(image);
 
 

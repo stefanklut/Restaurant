@@ -24,7 +24,7 @@ public class CategoryAdapter extends ArrayAdapter {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.category_item, parent, false);
         }
 
-        // Variables for the views in the convert view
+        // Variables for the view in the convert view
         TextView category = convertView.findViewById(R.id.textViewCategory);
 
         // Depending on the position set the name of the category

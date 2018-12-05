@@ -3,6 +3,7 @@ package com.example.stefan.restaurant;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable {
+    // Variables
     private String name;
     private String description;
     private String imageUrl;

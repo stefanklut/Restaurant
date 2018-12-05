@@ -18,15 +18,19 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+
+        // Request the categories to be displayed
         CategoriesRequest categoriesRequest = new CategoriesRequest(this);
         categoriesRequest.getCategories(this);
 
+        // Set OnItemClickListener for the list view
         ListView listView = findViewById(R.id.listViewCategories);
         listView.setOnItemClickListener(new OnItemClickListener());
     }
 
     @Override
     public void gotCategories(ArrayList<String> categories) {
+        // Show retrieved categories in the list view
         ListView listView = findViewById(R.id.listViewCategories);
         CategoryAdapter adapter = new CategoryAdapter(this, R.layout.category_item, categories);
         listView.setAdapter(adapter);
@@ -34,6 +38,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
 
     @Override
     public void gotCategoriesError(String message) {
+        // Display error if no categories were retrieved
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

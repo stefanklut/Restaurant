@@ -1,6 +1,5 @@
 package com.example.stefan.restaurant;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
@@ -20,6 +19,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     Callback activity;
 
     public interface Callback {
+        // Callback functions
         void gotCategories(ArrayList<String> categories);
         void gotCategoriesError(String message);
     }
@@ -30,11 +30,13 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
+        // If Volley gets an error return this to the activity
         activity.gotCategoriesError(error.getMessage());
     }
 
     @Override
     public void onResponse(JSONObject response) {
+        // Check if the JSONArray exists
         JSONArray jsonArray = null;
         try {
             jsonArray = response.getJSONArray("categories");
@@ -43,8 +45,9 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             activity.gotCategoriesError(e.getMessage());
         }
 
+        //If it does put the items from the JSONArray into a String in an ArrayList
         if (jsonArray != null) {
-            ArrayList<String> categories = new ArrayList<String>();
+            ArrayList<String> categories = new ArrayList<>();
             for (int i = 0; i<jsonArray.length(); i++) {
                 try {
                     categories.add(jsonArray.get(i).toString());
@@ -60,11 +63,15 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     void getCategories(Callback activity) {
         this.activity = activity;
 
+        // Create Volley queue
         RequestQueue queue = Volley.newRequestQueue(context);
 
+        // Create JsonObjectRequest with API url
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 "https://resto.mprog.nl/categories",
                 null, this, this);
+
+        // Put request in the queue
         queue.add(jsonObjectRequest);
     }
 }
