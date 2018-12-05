@@ -39,8 +39,6 @@ public class MenuAdapter extends ArrayAdapter {
         Picasso.get()
                 .load(menuItem.getImageUrl())
                 .resize(250, 250)
-//                .placeholder(R.drawable.load_icon)
-//                .error(R.drawable.icon_failed)
                 .centerCrop()
                 .into(image);
 
