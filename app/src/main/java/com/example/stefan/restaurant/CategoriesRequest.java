@@ -45,7 +45,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             activity.gotCategoriesError(e.getMessage());
         }
 
-        //If it does put the items from the JSONArray into a String in an ArrayList
+        // If it does put the items from the JSONArray into a String in an ArrayList
         if (jsonArray != null) {
             ArrayList<String> categories = new ArrayList<>();
             for (int i = 0; i<jsonArray.length(); i++) {

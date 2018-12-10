@@ -45,7 +45,7 @@ public class MenuItemsRequest implements Response.Listener<JSONObject>, Response
             activity.gotMenuItemsError(e.getMessage());
         }
 
-        //If it does put the items from the JSONArray into a MenuItem Object in an ArrayList
+        // If it does put the items from the JSONArray into a MenuItem Object in an ArrayList
         if (jsonArray != null) {
             ArrayList<MenuItem> items = new ArrayList<>();
             for (int i = 0; i<jsonArray.length(); i++) {
