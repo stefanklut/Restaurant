@@ -15,13 +15,13 @@ Clicking on a dish will open a new activity with additional information about th
 ## Screenshots
 
 ### Categories selection:
-<img src="doc/Screenshot_20181205-142339.png" width="50%">
+<img src="doc/Screenshot_20181205-142339.png" width="30%">
 
 ### Menu item selection:
-<img src="doc/Screenshot_20181205-142345.png" width="50%">
+<img src="doc/Screenshot_20181205-142345.png" width="30%">
 
 ### Displayed menu item:
-<img src="doc/Screenshot_20181205-142358.png" width="50%">
+<img src="doc/Screenshot_20181205-142358.png" width="30%">
 
 ### Landscape mode:
-<img src="doc/Screenshot_20181205-142350.png" width="100%">
+<img src="doc/Screenshot_20181205-142350.png" width="60%">
